@@ -28,8 +28,9 @@ pipeline {
             echo 'Build Docker Image'
             echo '***************************'
             sh """
-              docker build -t webapi:test $WORKSPACE
+              docker build -t autousers/mywebapi:test $WORKSPACE
               docker images
+              docker push autousers/mywebapi:test
             """
           }
         }
@@ -46,9 +47,7 @@ pipeline {
                 --detect.project.version.name=1.0 \\
                 --detect.target.type=IMAGE \\
                 --detect.tools.excluded=BINARY_SCAN \\
-                --detect.docker.image=webapi:test""", downloadStrategyOverride: [$class: 'ScriptOrJarDownloadStrategy']
-            echo 'Remove Image'
-            sh 'docker rmi webapi:test'
+                --detect.docker.image=autousers/mywebapi:test""", downloadStrategyOverride: [$class: 'ScriptOrJarDownloadStrategy']
           }
         }
     }
