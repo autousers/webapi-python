@@ -27,8 +27,10 @@ pipeline {
           steps {
             echo 'Build Docker Image'
             echo '***************************'
-            //sh 'docker build -t webapi:pipeline /home/jenkins/workspace/WebAPI/'
-            //sh 'docker images'
+            sh """
+              docker build -t webapi:test $WORKSPACE
+              docker images
+            """
           }
         }
         stage('Blackduck Scan') {
