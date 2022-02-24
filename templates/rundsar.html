@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2>{{output}}</h2>
+<a href="{% url 'scanhistory-page' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">View Report</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<!--<h2>{{profileid}}</h2>-->
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Profile ID</th>
+                <th scope="col">Profile Name</th>
+                <th scope="col">Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in profileid %}
+                <tr>
+                    <form action="search" method="post">
+                        {% csrf_token %}
+                        <td>
+                            <input class="form-control" type="text" name="profid" value="{{i.profid}}" readonly>
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" name="profname" value="{{i.profname}}" readonly>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Select</button>
+                        </td>
+                    </form>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>        
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 align="center">Connect to BigID Server</h1>
+<hr>
+<form action="connectsvr" method="post">
+    {% csrf_token %}
+    <div class="row justify-content-center">
+        <div class="col">
+            <input class="form-control" type="text" name="serverurl" placeholder="Server URL">   
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Connect</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

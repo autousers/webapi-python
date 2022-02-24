@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h4>Scan History</h4>
+<div class="table-responsive">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Request ID</th>
+            <th scope="col">Display Name</th>
+            <th scope="col">Complete Time</th>
+            <th scope="col">View Report</th>
+            <th scope="col">Type Report</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in output %}
+              {% if not i.data_deleted %}
+                <tr>
+                  <form action="viewreports" method="get">
+                    {% csrf_token %}
+                    <td>
+                      <input class="form-control" type="text" name="reqid" value="{{i.request_id}}" readonly>
+                    </td>
+                    <td>{{i.identity_display_name}}</td>
+                    <td>{{i.updated_at}}</td>
+                    <td>
+                      <button type="submit" class="btn btn-primary">View Report</button>
+                    </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="typeOpt" id="inlineRadio1" value="JSON" checked>
+                        <label class="form-check-label" for="inlineRadio1">JSON</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="typeOpt" id="inlineRadio2" value="CSV">
+                        <label class="form-check-label" for="inlineRadio2">CSV</label>
+                      </div>
+                    </td>
+                  </form>
+                </tr>
+              {% endif %}
+            {% endfor %}
+        </tbody>
+      </table>
+  </div>
+{% endblock %}

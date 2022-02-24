@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h1 align="center">Search Individual</h1>
+<hr>
+<form action="datauser" method="post">
+    {% csrf_token %}
+    <div class="row justify-content-center">
+        <div class="col">
+            <input class="form-control" type="text" name="searchtext" placeholder="userID or userName">   
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+<hr>
+
+<div class="container">
+    {% if output == "Not Found" or output == "" %}
+        <p>{{output}}</p>
+    {% else %}
+        <hr>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Display Name</th>
+                        <th scope="col">Run DSAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in output %}
+                        <tr>
+                            <form action="rundsar" method="post">
+                                {% csrf_token %}
+                                <td>
+                                    <input class="form-control" type="text" name="uid" value="{{i.id}}" readonly>
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" name="dname" value="{{i.name}}" readonly>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary">Run Report</button>
+                                </td>
+                            </form>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>        
+    {% endif %}
+</div>
+
+{% endblock %}

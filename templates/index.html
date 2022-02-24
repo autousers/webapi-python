@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1 align = "center">ทดสอบการทำงาน WebAPI</h1>
+    <h2 align = "left">Content</h2>
+    <hr>
+    <a href="{% url 'session-page' %}"><h3>Connect to BigID server</h3></a>
+    <a href="{% url 'profile-page' %}"><h3>Get Profile ID</h3></a>
+    <a href="{% url 'search-page' %}"><h3>Search Individual</h3></a>
+    <a href="{% url 'scanhistory-page' %}"><h3>Scan History</h3></a>
+
+{% endblock %}
