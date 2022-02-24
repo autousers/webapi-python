@@ -1,5 +1,7 @@
 FROM python:3.8.6-slim
 
+RUN apt install curl -y
+
 ENV SEEKER_SERVER_URL="https://10.103.3.39:8443"
 # Download Seeker Agent from the Server
 RUN curl -v -k -o /tmp/seeker-agent.zip "${SEEKER_SERVER_URL}/rest/api/latest/installers/agents/binaries/JAVA"
