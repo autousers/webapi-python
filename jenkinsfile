@@ -23,7 +23,7 @@ pipeline {
               }
           }
           steps {
-
+            echo 'test Coverity'
           }
         }
         stage('BuildImage') {
