@@ -1,21 +1,6 @@
 pipeline {
     agent none
     stages {
-      stage('PullCode') {
-        agent {
-          node {
-            label 'covanly-linux'
-          }
-        }
-        steps {
-          echo 'Download Code from GitHub'
-          echo '**************************'
-          //git branch: 'master',
-          //    credentialsId: '36f2ed2c-cd54-4bb0-a977-044253450d8c',
-          //    url: 'https://github.com/autousers/Webapp-api.git'
-          //sh 'ls -l'
-        }
-      }
         stage('Coverity Scan') {
           agent {
               node {
@@ -24,6 +9,13 @@ pipeline {
           }
           steps {
             echo 'test Coverity'
+            withCoverityEnvironment(coverityInstanceUrl: 'http://10.103.3.36:8080', createMissingProjectsAndStreams: true, projectName: 'webapp-test', streamName: 'webapp-test', viewName: 'High Impact Outstanding') {
+              sh """
+                cov-capture --dir idir --source-dir .
+                cov-analyze --dir idir --all --webapp-security --distrust-all --strip-path $WORKSPACE
+                cov-commit-defects --dir idir --url $COV_URL --stream $COV_STREAM --auth-key-file $COV_AUTH_KEY_PATH
+              """
+            }
           }
         }
         stage('BuildImage') {
