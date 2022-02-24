@@ -41,6 +41,14 @@ pipeline {
           }
           steps {
             echo 'Blackduck scan test'
+            synopsys_detect detectProperties: """--blackduck.url=https://nforcesecure.app.blackduck.com \\
+                --detect.project.name=webapp-test \\
+                --detect.project.version.name=1.0 \\
+                --detect.target.type=IMAGE \\
+                --detect.tools.excluded=BINARY_SCAN \\
+                --detect.docker.image=webapi:test""", downloadStrategyOverride: [$class: 'ScriptOrJarDownloadStrategy']
+            echo 'Remove Image'
+            sh 'docker rmi webapi:test'
           }
         }
     }
