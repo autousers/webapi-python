@@ -1,6 +1,6 @@
 FROM python:3.8.6-slim
 
-RUN apt install curl -y
+RUN apt-get update; apt-get install curl -y
 
 ENV SEEKER_SERVER_URL="https://10.103.3.39:8443"
 # Download Seeker Agent from the Server
