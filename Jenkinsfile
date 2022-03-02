@@ -50,5 +50,31 @@ pipeline {
                 --detect.docker.image=autousers/mywebapi:test""", downloadStrategyOverride: [$class: 'ScriptOrJarDownloadStrategy']
           }
         }
-    }
+        stage('Prisma Image Scan') {
+          agent {
+            node {
+              label 'covanly-linux'
+            }
+          }
+          steps {
+            // Scan the image
+            prismaCloudScanImage ca: '',
+            cert: '',
+            dockerAddress: 'unix:///var/run/docker.sock',
+            image: 'autousers/mywebapi*',
+            key: '',
+            logLevel: 'info',
+            podmanPath: '',
+            project: '',
+            resultsFile: 'prisma-cloud-scan-results.json',
+            ignoreImageBuildTime:true
+          }
+        }
+      }
+      post {
+        always {
+          // The post section lets you run the publish step regardless of the scan results
+          prismaCloudPublish resultsFilePattern: 'prisma-cloud-scan-results.json'
+        }
+      }
 }

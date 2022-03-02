@@ -7,9 +7,9 @@ def hello(request):
 
 def sessions(request):
     return render(request,'session.html')
-    
+
 def connect(request):
-    global server 
+    global server
     server = request.POST['serverurl']
     urllib3.disable_warnings()
     url = "https://" + server + "/api/v1/sessions"
@@ -17,10 +17,10 @@ def connect(request):
     'accept': "application/json",
     'content-type': "application/json"
     }
-    data = {'username': 'bigid', 'password': 'bigid111'}
+    data = {'username': 'bigid', 'password': 'Bigid@111'}
     response = requests.post(url, headers=headers, json=data, verify=False)
     output = response.json()
-    global token 
+    global token
     token = output['auth_token']
     return render(request,'result.html', {'server':response, 'token':output['auth_token']})
 
@@ -40,7 +40,7 @@ def profileid(request):
         mydict['newprofiles'].insert(i, {'profid': x.pop('_id'), 'profname': x.pop('name')})
         i += 1
         print(mydict)
-    
+
     return render(request,'profile.html', {'profileid':mydict['newprofiles']})
 
 def search(request):
@@ -67,7 +67,7 @@ def datauser(request):
     response = requests.get(url, headers=headers, params=queryparam, verify=False)
     result = response.json()
     item = result['usersArray']
-    
+
     if result['usersArray'] == []:
         result = "Not Found"
         return render(request,'search.html', {'output':result})
