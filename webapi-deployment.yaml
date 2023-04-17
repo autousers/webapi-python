@@ -19,6 +19,8 @@ spec:
         image: autousers/mywebapi:test
         ports:
         - containerPort: 8000
+      imagePullSecrets:
+      - name: docker-secret
 
 ---
 apiVersion: v1
