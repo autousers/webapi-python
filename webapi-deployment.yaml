@@ -28,6 +28,7 @@ metadata:
 spec:
   selector:
     app: webapi
+  type: NodePort
   ports:
     - protocol: TCP
       port: 8000
