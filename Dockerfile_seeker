@@ -1,9 +1,6 @@
 FROM python:3.8.6-slim as webapp
 ENV SEEKER_SERVER_URL="http://10.103.3.146:8080"
 ENV SEEKER_PROJECT_KEY=webapi-python
-RUN set -eux; \
-    apt-get update; \
-    apt-get install -y unzip;
 RUN mkdir /code/
 COPY . /code/
 COPY docker-entrypoint.sh /docker-entrypoint.sh 

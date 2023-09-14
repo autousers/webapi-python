@@ -5,8 +5,9 @@
 ### Seeker Configuration
 if [[ ! -z ${SEEKER_ENABLED} ]]; then
   rm -rf /var/lib/apt/lists/* && apt-get update && apt-get install curl -y 
-  curl -v -k -o seeker-agent.zip "${SEEKER_SERVER_URL}/rest/api/latest/installers/agents/binaries/PYTHON" 
-  mkdir -p /tmp/seeker && unzip seeker-agent.zip -d /tmp/seeker
+  curl -v -k -o seeker-agent.tar "${SEEKER_SERVER_URL}/rest/api/latest/installers/agents/binaries/PYTHON"
+  ls -l
+  tar -xvzf seeker-agent.tar
 fi
 ### Original Run Command or equivalent (potentially with new Seeker Arguments as required by the application configuration)
 ### Should include potential CMD arguments provided to Docker if originally a simple command (accomplished here by $*) 
