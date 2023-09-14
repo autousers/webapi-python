@@ -1,0 +1,14 @@
+FROM python:3.8.6-slim as webapp
+ENV SEEKER_SERVER_URL="http://10.103.3.146:8080"
+ENV SEEKER_PROJECT_KEY=webapi-python
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y unzip;
+RUN mkdir /code/
+COPY . /code/
+COPY docker-entrypoint.sh /docker-entrypoint.sh 
+WORKDIR /code/
+RUN pip install -r requirements.txt
+EXPOSE 8000
+ENTRYPOINT ["bash","-x","/docker-entrypoint.sh"]
+CMD ["seeker-exec","gunicorn","--bind","0.0.0.0:8000","webdemo.wsgi"]
