@@ -8,4 +8,4 @@ WORKDIR /code/
 RUN pip install -r requirements.txt
 EXPOSE 8000
 ENTRYPOINT ["bash","-x","/docker-entrypoint.sh"]
-CMD ["seeker-exec","gunicorn","--bind","0.0.0.0:8000","webdemo.wsgi"]
+#CMD ["seeker-exec","gunicorn","--bind","0.0.0.0:8000","webdemo.wsgi"]

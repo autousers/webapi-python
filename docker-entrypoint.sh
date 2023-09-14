@@ -8,6 +8,7 @@ if [[ ! -z ${SEEKER_ENABLED} ]]; then
   curl -v -k -o seeker-agent.tar "${SEEKER_SERVER_URL}/rest/api/latest/installers/agents/binaries/PYTHON"
   ls -l
   tar -xvzf seeker-agent.tar
+  seeker-exec gunicorn --bind=0.0.0.0:8000 webdemo.wsgi
 fi
 ### Original Run Command or equivalent (potentially with new Seeker Arguments as required by the application configuration)
 ### Should include potential CMD arguments provided to Docker if originally a simple command (accomplished here by $*) 
