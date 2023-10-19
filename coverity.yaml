@@ -1,0 +1,6 @@
+analyze:
+  location: local
+commit:
+  connect:
+    stream: webapi-python-2
+    url: http://10.103.3.144:8080

@@ -17,5 +17,5 @@ toml==0.10.1
 urllib3==1.25.10
 whitenoise==5.2.0
 wrapt==1.12.1
---trusted-host 10.103.3.146:8080 --extra-index-url "http://10.103.3.146:8080/pypi-server/simple" 
-seeker-agent
+#--trusted-host 10.103.3.146:8080 --extra-index-url "http://10.103.3.146:8080/pypi-server/simple" 
+#seeker-agent
