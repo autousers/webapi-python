@@ -1,7 +1,7 @@
 #!/bin/bash
 # docker-entrypoint.sh 
 ### Original Script Configuration – or empty if simple command.
-…
+
 ### Seeker Configuration
 if [[ ! -z ${SEEKER_ENABLED} ]]; then
   rm -rf /var/lib/apt/lists/* && apt-get update && apt-get install curl -y 
