@@ -1,0 +1,5 @@
+capture:
+  build:
+    clean-command: dotnet msbuild /t:Restore;Clean OWASPTop10.SqlInjection.Web.csproj
+    build-command: dotnet msbuild /t:Restore;Build
+    aspnet-compiler: true
