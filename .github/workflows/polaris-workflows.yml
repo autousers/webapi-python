@@ -13,7 +13,7 @@ jobs:
             
       - name: Polaris Full Scan
         if: ${{ github.event_name != 'pull_request' }}
-        uses: synopsys-sig/synopsys-action@v1.9.0
+        uses: synopsys-sig/synopsys-action@v1.11.0
         with:
           polaris_server_url: ${{ vars.POLARIS_SERVER_URL }}
           polaris_access_token: ${{ secrets.POLARIS_ACCESS_TOKEN }}
@@ -35,7 +35,7 @@ jobs:
 
       - name: Polaris PR Scan
         if: ${{ github.event_name == 'pull_request' }}
-        uses: synopsys-sig/synopsys-action@v1.9.0
+        uses: synopsys-sig/synopsys-action@v1.11.0
         with:
           polaris_server_url: ${{ vars.POLARIS_SERVER_URL }}
           polaris_access_token: ${{ secrets.POLARIS_ACCESS_TOKEN }}
