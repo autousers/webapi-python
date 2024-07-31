@@ -10,7 +10,6 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v3
-            
       - name: Polaris Full Scan
         if: ${{ github.event_name != 'pull_request' }}
         uses: synopsys-sig/synopsys-action@v1.11.0
@@ -20,10 +19,14 @@ jobs:
           polaris_application_name: toh-synopsys
           polaris_project_name: test-python
           polaris_assessment_types: "SCA,SAST"
-            
+          # project_directory: ${{ vars.PROJECT_DIRECTORY }}
+          ### Uncomment below configuration for source code upload 
+          # polaris_assessment_mode: "SOURCE_UPLOAD"
+          # project_source_archive: ${{ vars.PROJECT_SOURCE_ARCHIVE }}
+          # project_source_excludes: ${{ vars.PROJECT_SOURCE_EXCLUDES }} # Accepts Multiple Values
+          # project_source_preserveSymLinks: true
           ### Uncomment below configuration if Synopsys Bridge diagnostic files needs to be uploaded
           # include_diagnostics: true
-
           ### SARIF report generation and upload to GitHub Adavanced Security Tab: Uncomment below to enable
           # polaris_reports_sarif_create: true  
           # polaris_reports_sarif_file_path: '/Users/tmp/report.sarif.json' # File path (including file name) where SARIF report is created.
@@ -31,8 +34,17 @@ jobs:
           # polaris_reports_sarif_groupSCAIssues: true 
           # polaris_reports_sarif_issue_types: 'SCA, SAST' 
           # polaris_upload_sarif_report: true 
-          # github_token: ${{ secrets.GT_TOKEN }} # Required when polaris_upload_sarif_report is set as true
-
+          # github_token: ${{ secrets.GITHUB_TOKEN }} # Required when polaris_upload_sarif_report is set as true
+          ### Signature scan
+          #polaris_test_sca_type: "SCA-SIGNATURE"
+          ### Uncomment below to add arbitrary CL parameters
+          # blackduck_search_depth: 2
+          # blackduck_args: '--detect.diagnostic=true'
+          # blackduck_config_path: '/Users/Config/application.properties'
+          # coverity_build_command: mvn clean install
+          # coverity_clean_command: mvn clean
+          # coverity_config_path: /Users/Config/coverity.yml
+          # coverity_args: --config-override capture.build.build-command=mvn install
       - name: Polaris PR Scan
         if: ${{ github.event_name == 'pull_request' }}
         uses: synopsys-sig/synopsys-action@v1.11.0
@@ -42,12 +54,15 @@ jobs:
           polaris_application_name: toh-synopsys
           polaris_project_name: test-python
           polaris_assessment_types: "SCA,SAST"
-          
+          # project_directory: ${{ vars.PROJECT_DIRECTORY }}
+          ### Uncomment below configuration for source code upload 
+          # polaris_assessment_mode: "SOURCE_UPLOAD"
+          # project_source_archive: ${{ vars.PROJECT_SOURCE_ARCHIVE }}
+          # project_source_excludes: ${{ vars.PROJECT_SOURCE_EXCLUDES }} # Accepts Multiple Values
+          # project_source_preserveSymLinks: true
           ### Below configuration is used to enable feedback from Polaris security testing as pull request comment
-          polaris_prComment_enabled: true
-          polaris_prComment_severities: "Critical, High, Medium, Low, Informational"
+          polaris_prComment_enabled: true 
           github_token: ${{ secrets.GT_TOKEN }} 
           # Mandatory when polaris_prComment_enabled is set to 'true'
-          
           ### Uncomment below configuration if Synopsys Bridge diagnostic files needs to be uploaded
           # include_diagnostics: true
