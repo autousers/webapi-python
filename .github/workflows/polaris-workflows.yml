@@ -84,10 +84,10 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         uses: blackduck-inc/black-duck-security-scan@v2
         with:
-          polaris_server_url: ${{ vars.POLARIS_SERVER_URL }}
+          polaris_server_url: https://poc.polaris.blackduck.com
           polaris_access_token: ${{ secrets.POLARIS_ACCESS_TOKEN }}
-          polaris_application_name: ${{ github.event.repository.name }}
-          polaris_project_name: ${{ github.event.repository.name }}
+          polaris_application_name: APAC-ASEAN-nForce-1
+          polaris_project_name: demo-python
           polaris_assessment_types: "SAST"
           # project_directory: ${{ vars.PROJECT_DIRECTORY }}
 
