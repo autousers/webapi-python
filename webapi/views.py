@@ -105,7 +105,7 @@ def viewreports(request):
             'Authorization': token
         }
         querystring = {'format':'csv'}
-        response = requests.get(url, headers=headers, params=querystring, verify=False)
+        #response = requests.get(url, headers=headers, params=querystring, verify=False)
         return render(request, 'report.html', {'output':response.text})
     else:
         headers = {
