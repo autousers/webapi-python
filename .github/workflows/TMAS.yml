@@ -3,6 +3,10 @@ name: TMAS Scan
 on:
   push:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   tmas-scan:
     name: TMAS Repo Scan
